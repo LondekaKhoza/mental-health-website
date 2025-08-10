@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeSpace | Quiz Menu</title>
+  <style>
+    :root {
+      --deep-blue: #023047;
+      --light-blue: #8ecae6;
+      --sand: #fefae0;
+      --coral: #f4a261;
+      --text-dark: #264653;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, var(--light-blue), var(--sand));
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      color: var(--deep-blue);
+      font-weight: bold;
+    }
+
+    .subheading {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      margin-top: 8px;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .quiz-link {
+      background-color: var(--coral);
+      color: white;
+      padding: 15px 25px;
+      margin: 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      width: 90%;
+      max-width: 300px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: background 0.3s ease;
+    }
+
+    .quiz-link:hover {
+      background-color: #e07a3f;
+    }
+
+    .back {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    .back a {
+      color: var(--deep-blue);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">🧠 SafeSpace Quizzes</div>
+    <div class="subheading">Take a moment to check in with yourself</div>
+  </header>
+
+  <main>
+    <a href="depression-quiz.html" class="quiz-link">✔️ Depression Check-In</a>
+    <a href="anxiety-quiz.html" class="quiz-link">🌫️ Anxiety Level Quiz</a>
+    <a href="burnout-quiz.html" class="quiz-link">🔥 Burnout Scale</a>
+    <a href="self-esteem-quiz.html" class="quiz-link">💬 Self-Esteem Pulse</a>
+    <a href="social-overwhelm.html" class="quiz-link">🌪️ Social Overwhelm Quiz</a>
+
+    <div class="back">
+      <a href="index.html">← Back to Home</a>
+      <a href="journal.html">← Go to Journal</a>
+    </div>
+  
+  </main>
+</body>
+</html>

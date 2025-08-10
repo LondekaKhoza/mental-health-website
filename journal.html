@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Safe Space Journal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --deep-blue: #023047;
+      --light-blue: #8ecae6;
+      --sand: #fefae0;
+      --coral: #f4a261;
+      --text-dark: #264653;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, var(--light-blue), var(--sand));
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      padding: 30px 20px 10px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: var(--deep-blue);
+    }
+    .container {
+      max-width: 4800px;
+      margin: 32px auto;
+      padding: 20px;
+      background: #9fe2bf;
+    }
+    .date-time {
+      text-align: right;
+      font-size: 0.98em;
+      color: black;
+      margin-bottom: 20px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .emoji-bar {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .emoji-btn {
+      background: none;
+      border: none;
+      font-size: 1.9em;
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.1s;
+    }
+    .emoji-btn.selected {
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px #76C7C0;
+      transform: scale(1.13);
+    }
+    .selected-emojis {
+      min-height: 36px;
+      margin-bottom: 8px;
+      text-align: left;
+      font-size: 1.5em;
+    }
+    label {
+      display: block;
+      margin: 15px 0 6px 0;
+      font-weight: 600;
+      color: black;
+      font-size: 1.1em;
+    }
+     textarea {
+      width: 90%;
+      min-height: 200px;
+      padding: 15px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #76c7c0;
+      resize: vertical;
+    }
+    .audio-section {
+      margin-bottom: 18px;
+    }
+    .audio-controls {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 7px;
+    }
+    button {
+      background: linear-gradient(90deg, #76C7C0 80%, #01497C 100%);
+      color: #013A63;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      box-shadow: 0 2px 8px rgba(1, 58, 99, 0.12);
+      transition: background 0.2s, color 0.2s;
+    }
+    button:active {
+      background: #01497C;
+      color: #fff;
+    }
+    .saved-journal {
+      background: whitesmoke;
+      border-radius: 10px;
+      margin-top: 24px;
+      padding: 16px;
+    }
+    .saved-journal h2 {
+      color: #76C7C0;
+      margin-top: 0;
+      font-size: 1.2em;
+    }
+    .audio-playback {
+      margin-top: 7px;
+      background: #D1F2F7;
+      padding: 6px;
+      border-radius: 7px;
+    }
+    ::placeholder {
+      color: #76C7C0;
+      opacity: 1;
+    }
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: var(--deep-blue);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My safe space</h1>
+  </header>
+  <div class="container">
+    <div class="date-time" id="dateTime"></div>
+    <div class="emoji-bar" id="emojiBar">
+      <button class="emoji-btn" data-emoji="😊" title="Happy">😊</button>
+      <button class="emoji-btn" data-emoji="😢" title="Sad">😢</button>
+      <button class="emoji-btn" data-emoji="😠" title="Angry">😠</button>
+      <button class="emoji-btn" data-emoji="😰" title="Anxious">😰</button>
+      <button class="emoji-btn" data-emoji="😴" title="Tired">😴</button>
+      <button class="emoji-btn" data-emoji="🌈" title="Hopeful">🌈</button>
+    </div>
+    <div class="selected-emojis" id="selectedEmojis"></div>
+
+    <label for="journalEntry">Write your thoughts</label>
+    <textarea id="journalEntry" placeholder="Type your feelings, dreams, or anything you'd like to express..."></textarea>
+
+    <div class="audio-section">
+      <label>Record your feelings</label>
+      <div class="audio-controls">
+        <button id="recordBtn">🎤 Record</button>
+        <button id="stopBtn" disabled>⏹️ Stop</button>
+        <span id="recordingStatus" style="font-size:0.98em;color:#76C7C0;"></span>
+      </div>
+      <div id="audioPlayback"></div>
+    </div>
+
+    <button id="saveBtn">Save Journal</button>
+    <div id="savedJournal"></div>
+  </div>
+
+  <div class="back">
+    <a href="index.html">Back to home</a>
+  </div>
+
+  <script>
+    // Update date & time
+    function updateDateTime() {
+      const dtElem = document.getElementById('dateTime');
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      let time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+      dtElem.textContent = now.toLocaleDateString(undefined, options) + ' • ' + time;
+    }
+    updateDateTime();
+
+    // Emoji selection
+    const emojis = [];
+    document.querySelectorAll('.emoji-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('selected');
+        const emoji = btn.dataset.emoji;
+        if (btn.classList.contains('selected')) {
+          if (!emojis.includes(emoji)) emojis.push(emoji);
+        } else {
+          const i = emojis.indexOf(emoji);
+          if (i !== -1) emojis.splice(i, 1);
+        }
+        document.getElementById('selectedEmojis').textContent = emojis.join(' ');
+      });
+    });
+
+    // Audio Recorder
+    let mediaRecorder, audioChunks = [], audioURL = null;
+    const recordBtn = document.getElementById('recordBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const audioPlayback = document.getElementById('audioPlayback');
+    const recordingStatus = document.getElementById('recordingStatus');
+
+    recordBtn.onclick = async function() {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert("Recording not supported in your browser.");
+        return;
+      }
+      recordBtn.disabled = true;
+      stopBtn.disabled = false;
+      recordingStatus.textContent = "Recording...";
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        audioChunks = [];
+        mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+          audioURL = URL.createObjectURL(audioBlob);
+          showAudioPlayback(audioURL);
+          stream.getTracks().forEach(track => track.stop());
+        };
+        mediaRecorder.start();
+      } catch (err) {
+        alert("Could not start recording: " + err.message);
+        recordBtn.disabled = false;
+        stopBtn.disabled = true;
+        recordingStatus.textContent = "";
+      }
+    };
+
+    stopBtn.onclick = function() {
+      if (mediaRecorder && mediaRecorder.state !== "inactive") {
+        mediaRecorder.stop();
+        recordBtn.disabled = false;
+        stopBtn.disabled = true;
+        recordingStatus.textContent = "Recording stopped.";
+      }
+    };
+
+    function showAudioPlayback(url) {
+      audioPlayback.innerHTML = `<div class="audio-playback"><audio controls src="${url}"></audio></div>`;
+    }
+
+    // Save Journal
+    document.getElementById('saveBtn').onclick = function() {
+      const entry = document.getElementById('journalEntry').value.trim();
+      const emojisStr = emojis.join(' ');
+      const dt = document.getElementById('dateTime').textContent;
+      let journalHtml = `<div class="saved-journal">
+        <h2>Saved Entry (${dt})</h2>
+        <div><strong>Emojis:</strong> ${emojisStr || '<em>None</em>'}</div>
+        <div><strong>Thoughts:</strong><br>${entry ? entry.replace(/\n/g, '<br>') : '<em>None</em>'}</div>`;
+      if (audioURL) {
+        journalHtml += `<div><strong>Audio:</strong><br><audio controls src="${audioURL}"></audio></div>`;
+      }
+      journalHtml += "</div>";
+      document.getElementById('savedJournal').innerHTML = journalHtml;
+      // Optionally, clear after save:
+      document.getElementById('journalEntry').value = "";
+      document.getElementById('selectedEmojis').textContent = "";
+      emojis.length = 0;
+      document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('selected'));
+      audioPlayback.innerHTML = "";
+      audioURL = null;
+      recordingStatus.textContent = "";
+      updateDateTime();
+    };
+  </script>
+</body>
+</html>

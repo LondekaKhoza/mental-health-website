@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Depression Quiz – SafeSpace</title>
+  <style>
+    :root {
+      --deep-blue: #023047;
+      --light-blue: #8ecae6;
+      --sand: #fefae0;
+      --coral: #f4a261;
+      --text-dark: #264653;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, var(--light-blue), var(--sand));
+      color: var(--text-dark);
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--deep-blue);
+      margin-bottom: 20px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .question {
+      margin-bottom: 25px;
+    }
+
+    .question h3 {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    .btn {
+      background-color: var(--coral);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .btn:hover {
+      background-color: #e07a3f;
+    }
+
+    .result {
+      text-align: center;
+      margin-top: 30px;
+      display: none;
+    }
+
+    .result h2 {
+      font-size: 1.8rem;
+    }
+
+    .emoji {
+      font-size: 2.5rem;
+      margin: 10px 0;
+    }
+
+    .message {
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+
+    .support-links {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .support-links a {
+      display: inline-block;
+      margin: 8px;
+      text-decoration: none;
+      background-color: var(--deep-blue);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .support-links a:hover {
+      background-color: #011f33;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>🧠 Depression Check-In</h1>
+
+  <form id="quizForm">
+    <div class="question">
+      <h3>1. How often have you felt down or sad recently?</h3>
+      <label><input type="radio" name="q1" value="3"> Nearly every day</label>
+      <label><input type="radio" name="q1" value="2"> More than half the days</label>
+      <label><input type="radio" name="q1" value="1"> A few days</label>
+      <label><input type="radio" name="q1" value="0"> Rarely or never</label>
+    </div>
+
+    <div class="question">
+      <h3>2. Do you feel tired or low on energy?</h3>
+      <label><input type="radio" name="q2" value="3"> All the time</label>
+      <label><input type="radio" name="q2" value="2"> Often</label>
+      <label><input type="radio" name="q2" value="1"> Sometimes</label>
+      <label><input type="radio" name="q2" value="0"> Rarely</label>
+    </div>
+
+    <div class="question">
+      <h3>3. Do you still enjoy things you used to?</h3>
+      <label><input type="radio" name="q3" value="3"> Not at all</label>
+      <label><input type="radio" name="q3" value="2"> Less than before</label>
+      <label><input type="radio" name="q3" value="1"> A little bit</label>
+      <label><input type="radio" name="q3" value="0"> Yes, same as always</label>
+    </div>
+
+    <div class="question">
+      <h3>4. How are you sleeping?</h3>
+      <label><input type="radio" name="q4" value="3"> I can't sleep or oversleep</label>
+      <label><input type="radio" name="q4" value="2"> Sleep is often off</label>
+      <label><input type="radio" name="q4" value="1"> Slightly different</label>
+      <label><input type="radio" name="q4" value="0"> Sleeping normally</label>
+    </div>
+
+    <div class="question">
+      <h3>5. Have you had thoughts of self-harm or giving up?</h3>
+      <label><input type="radio" name="q5" value="3"> Yes, often</label>
+      <label><input type="radio" name="q5" value="2"> Sometimes</label>
+      <label><input type="radio" name="q5" value="1"> A little</label>
+      <label><input type="radio" name="q5" value="0"> No, not at all</label>
+    </div>
+
+    <button type="submit" class="btn">See My Result</button>
+  </form>
+
+  <div class="result" id="resultBox">
+    <h2>Your Check-In Result</h2>
+    <div class="emoji" id="emoji">🌿</div>
+    <div class="message" id="message">You’re doing okay. Don’t forget to rest and breathe today.</div>
+
+    <div class="support-links">
+      <a href="https://www.sadag.org/" target="_blank">Get Support (SADAG)</a>
+      <a href="tel:0800567567">Call: 0800 567 567</a>
+      <a href="mailto:support@yourhelpline.org">Email a Listener</a>
+    </div>
+
+    <a class="back-link" href="index.html">← Back to Home</a>
+  </div>
+
+  <script>
+    const form = document.getElementById('quizForm');
+    const resultBox = document.getElementById('resultBox');
+    const emoji = document.getElementById('emoji');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      let total = 0;
+      const data = new FormData(form);
+
+      for (let value of data.values()) {
+        total += parseInt(value);
+      }
+
+      form.style.display = 'none';
+      resultBox.style.display = 'block';
+
+      if (total <= 3) {
+        emoji.textContent = '🌞';
+        message.textContent = 'You seem to be doing well. Keep taking care of yourself.';
+      } else if (total <= 7) {
+        emoji.textContent = '🌿';
+        message.textContent = 'You’re okay, but take some time to rest. Talk to someone you trust.';
+      } else if (total <= 11) {
+        emoji.textContent = '🌧️';
+        message.textContent = 'You might be going through a rough time. It’s okay. You are not alone.';
+      } else {
+        emoji.textContent = '❤️‍🩹';
+        message.innerHTML = 'You might be feeling deeply overwhelmed. <br><br><strong>Please reach out to someone you trust or contact a support line. You matter.</strong>';
+      }
+    });
+  </script>
+
+</body>
+</html>

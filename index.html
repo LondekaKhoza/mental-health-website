@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SafeSpace - You’re Not Alone</title>
+  <script src="https://kit.fontawesome.com/d42854d593.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --deep-blue: #023047;
+      --light-blue: #8ecae6;
+      --sand: #fefae0;
+      --coral: #f4a261;
+      --text-dark: #264653;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, var(--light-blue), var(--sand));
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: transparent;
+    }
+
+    .logo {
+      font-size: 2.8rem;
+      color: var(--deep-blue);
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .slogan {
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-top: 10px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px;
+    }
+
+    .btn {
+      background-color: var(--coral);
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      margin: 15px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 90%;
+      max-width: 300px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: background 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background-color: #e07a3f;
+    }
+
+    .btn:active {
+      background-color: #6e3b17;
+      transform: translateY(1px);
+    }
+
+    footer {
+      background-color: var(--deep-blue);
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #fefae0;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer .socials img {
+      height: 24px;
+      margin: 5px;
+    }
+
+    footer .stores img {
+      height: 30px;
+      margin: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        font-size: 2.2rem;
+      }
+
+      .btn {
+        font-size: 1rem;
+        padding: 12px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">SafeSpace</div>
+    <div class="slogan">You’re not alone. Let it out, feel better, breathe again.</div>
+  </header>
+
+  <main>
+    <a href="quiz-menu.html" class="btn"> 🧠  Mental Health Quizzes</a>
+    <a href="survivour.html" class="btn"> ❤️  Survivors'Circle</a>
+    <a href="journal.html" class="btn"> 📔 Journal</a>
+    <a href="get-help.html" class="btn"> Get Help Now</a>
+    <a href="mental-health-tips.html" class="btn"> 📖  View helpful tips</a>
+  </main>
+
+  <footer>
+    <div>
+      <a href="#">Privacy Policy</a> | 
+      <a href="#">Terms</a> | 
+      <a href="#">Support</a>
+    </div>
+    <p>&copy; 2025 SafeSpace. All rights reserved.</p>
+    <div class="socials">
+      <a href="#"><img src="https://img.icons8.com/ios-filled/50/facebook-new.png" alt="Facebook"/></a>
+      <a href="#"><img src="https://img.icons8.com/ios-filled/50/instagram-new.png" alt="Instagram"/></a>
+      <a href="#"><img src="https://img.icons8.com/ios-filled/50/twitter.png" alt="Twitter"/></a>
+    </div>
+    <div class="stores">
+      <a href="#"><img src="https://img.icons8.com/ios/50/google-play.png" alt="Google Play"/></a>
+      <a href="#"><img src="https://img.icons8.com/ios/50/mac-os.png" alt="Apple Store"/></a>
+    </div>
+  </footer>
+
+</body>
+</html>

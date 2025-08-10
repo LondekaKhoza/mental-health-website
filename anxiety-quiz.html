@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anxiety Level Quiz | SafeSpace</title>
+  <style>
+    :root {
+      --deep-blue: #023047;
+      --light-blue: #8ecae6;
+      --sand: #fefae0;
+      --coral: #f4a261;
+      --text-dark: #264653;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, var(--light-blue), var(--sand));
+      margin: 0;
+      padding: 0;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 30px 20px 10px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: var(--deep-blue);
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .question label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: var(--coral);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #e07a3f;
+    }
+
+    #result {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .back {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .back a {
+      color: var(--deep-blue);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌫️ Anxiety Level Quiz</h1>
+    <p>Answer honestly to check in with yourself.</p>
+  </header>
+
+  <form id="anxietyQuiz">
+    <div class="question">
+      <label>1. How often do you feel nervous or on edge?</label>
+      <select name="q1">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Often</option>
+        <option value="3">Always</option>
+      </select>
+    </div>
+    <div class="question">
+      <label>2. Do you experience rapid heartbeat or shortness of breath?</label>
+      <select name="q2">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Often</option>
+        <option value="3">Always</option>
+      </select>
+    </div>
+    <div class="question">
+      <label>3. Do you struggle with racing thoughts or overthinking?</label>
+      <select name="q3">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Often</option>
+        <option value="3">Always</option>
+      </select>
+    </div>
+    <div class="question">
+      <label>4. How often do you avoid things because they make you anxious?</label>
+      <select name="q4">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Often</option>
+        <option value="3">Always</option>
+      </select>
+    </div>
+
+    <button type="button" onclick="calculateAnxiety()">Submit</button>
+    <div id="result"></div>
+  </form>
+
+  <div class="back">
+    <a href="quiz-menu.html">← Back to Quiz Menu</a>
+  </div>
+
+  <script>
+    function calculateAnxiety() {
+      const form = document.forms['anxietyQuiz'];
+      let score = 0;
+      for (let i = 1; i <= 4; i++) {
+        score += parseInt(form['q' + i].value);
+      }
+
+      let resultText = "";
+      if (score <= 3) {
+        resultText = "🌈 You're feeling quite calm overall. Keep doing what helps you stay centered.";
+      } else if (score <= 6) {
+        resultText = "🌤️ Some signs of anxiety are present. Be gentle with yourself and take time to breathe.";
+      } else if (score <= 9) {
+        resultText = "⛅ You might be feeling moderately anxious. Talking to someone or journaling may help.";
+      } else {
+        resultText = "🌪️ You're experiencing high anxiety. Please consider reaching out for support — you're not alone.";
+      }
+
+      document.getElementById("result").textContent = resultText;
+    }
+  </script>
+</body>
+</html>

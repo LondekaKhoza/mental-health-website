@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Survivor Stories</title>
+  <style>
+    :root {
+      --ocean: #6FB1FC;
+      --sand: #FDEBC1;
+      --text: #2F3E46;
+      --light: #ffffff;
+      --alert: #FFD6D6;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, var(--ocean), var(--sand));
+      margin: 0;
+      padding: 0;
+      color: var(--text);
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0;
+    }
+
+    .warning {
+      background-color: var(--alert);
+      padding: 10px 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .form-section, .story-section {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: var(--light);
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: vertical;
+    }
+
+    button {
+      background-color: var(--text);
+      color: var(--light);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .story {
+      background-color: var(--sand);
+      border-left: 5px solid var(--ocean);
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 6px;
+    }
+
+    .footer-link {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .footer-link a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💬 Survivor Stories</h1>
+    <p>You are not alone. This is your safe space.</p>
+  </header>
+
+  <div class="warning">
+    ⚠️ Trigger Warning: These stories may contain content related to abuse or trauma.
+  </div>
+
+  <div class="form-section">
+    <h2>📝 Share Your Story</h2>
+    <p>You may remain anonymous. This is a moderated space. No hate or harmful content allowed.</p>
+    <textarea id="storyInput" placeholder="Write your story here..."></textarea>
+    <br />
+    <button onclick="submitStory()">Post Anonymously</button>
+  </div>
+
+  <div class="story-section" id="storySection">
+    <h2>📚 Shared Stories</h2>
+    <div id="storyList"></div>
+  </div>
+
+  <div class="footer-link">
+    <a href="index.html">← Back to Home</a>
+    <a href="journal.html">← Go to Journal</a>
+  </div>
+
+  <script>
+    function submitStory() {
+      const storyInput = document.getElementById("storyInput");
+      const storyText = storyInput.value.trim();
+      if (!storyText) return;
+
+      const storyList = document.getElementById("storyList");
+
+      const storyDiv = document.createElement("div");
+      storyDiv.className = "story";
+      storyDiv.textContent = storyText;
+
+      storyList.prepend(storyDiv);
+      storyInput.value = "";
+    }
+  </script>
+</body>
+</html>
